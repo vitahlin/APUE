@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(08_12_fork)
+project(04_08_12_fork)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../)
-add_executable(08_12_fork 08_12_fork.cpp)
+add_executable(04_08_12_fork 04_08_12_fork.cpp)

@@ -5,10 +5,7 @@
  * 所以该程序包含一个竞争条件。
  */
 
-#include <sys/wait.h>
-#include <unistd.h>
-#include <iostream>
-using namespace std;
+#include "./../lib/apue.h"
 
 static void output(char* str) {
     char* ptr;
@@ -29,8 +26,7 @@ int main(int argc, const char** agrv) {
     char parent_str[] = "output from parent\n";
 
     if ((pid = fork()) < 0) {
-        cout << "fork error" << endl;
-        exit(0);
+        LogErrQuit("fork error");
     } else if (pid == 0) {
         output(child_str);
     } else {

@@ -2,7 +2,7 @@
 
 void LogErrQuit(string str) {
     cout << str << endl;
-    exit(0);
+    exit(1);
 }
 
 void LogErr(string str) {

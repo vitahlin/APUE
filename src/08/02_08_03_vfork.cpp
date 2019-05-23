@@ -6,9 +6,7 @@
  * 子进程对变量做增1的操作，结果改变了父进程中的变量值，因为子进程在父进程的地址空间中运行
  */
 
-#include <unistd.h>
-#include <iostream>
-using namespace std;
+#include "./../lib/apue.h"
 
 int global_var = 6;
 
@@ -19,8 +17,7 @@ int main(int argc, const char** agrv) {
     cout << "before fork" << endl;
 
     if ((pid = vfork()) < 0) {
-        cout << "fork error" << endl;
-        exit(0);
+        LogErrQuit("fork error");
     } else if (pid == 0) {
         global_var++;
         var++;

@@ -2,9 +2,7 @@
  * fork函数，子进程对变量所做的改变并不影响父进程该变量的值
  */
 
-#include <unistd.h>
-#include <iostream>
-using namespace std;
+#include "./../lib/apue.h"
 
 int global_var = 6;
 char buf[] = "a write to stdout\n";
@@ -14,15 +12,13 @@ int main(int argc, const char** agrv) {
     pid_t pid;
 
     if (write(STDOUT_FILENO, buf, sizeof(buf) - 1) != sizeof(buf) - 1) {
-        cout << "write error" << endl;
-        exit(0);
+        LogErrQuit("write error");
     }
 
     cout << "before fork" << endl;
 
     if ((pid = fork()) < 0) {
-        cout << "fork error" << endl;
-        exit(0);
+        LogErrQuit("fork error");
     } else if (pid == 0) {
         // child
         global_var++;

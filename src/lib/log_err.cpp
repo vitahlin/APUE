@@ -28,7 +28,7 @@ void TELL_WAIT() {
         LogErrQuit("signal sigusr2 error");
     }
 
-    // 将参数set信号并初始化为空，执行成功返回0，有错误返回-1
+    // 将newmask信号集初始化为空，执行成功返回0，有错误返回-1
     sigemptyset(&newmask);
     sigemptyset(&zeromask);
 

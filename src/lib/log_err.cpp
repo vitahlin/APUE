@@ -36,6 +36,7 @@ void TELL_WAIT() {
     sigaddset(&newmask, SIGUSR1);
     sigaddset(&newmask, SIGUSR2);
 
+    // 调用该函数的进程，使用新的信号屏蔽集。newmask是我们希望阻塞的附加信号集
     if (sigprocmask(SIG_BLOCK, &newmask, &oldmask) < 0) {
         LogErrQuit("SIG_BLOCK error");
     }

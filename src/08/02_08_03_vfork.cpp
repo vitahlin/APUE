@@ -14,13 +14,15 @@ int main(int argc, const char** agrv) {
     int var = 88;
     pid_t pid;
 
-    cout << "before fork" << endl;
+    cout << "before fork, var=" << var << endl;
 
     if ((pid = vfork()) < 0) {
         LogErrQuit("fork error");
     } else if (pid == 0) {
         global_var++;
         var++;
+
+        // 子进程需要调用exit父进程才能运行
         _exit(0);
     }
 

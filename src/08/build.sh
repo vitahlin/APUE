@@ -12,14 +12,14 @@ fi
 
 # 判断运行脚本参数是否合法
 if [ $# -ne 1 ]; then
-    echo "\nRun build.sh like this:\n   \033[32m sh build.sh day_time_tcp_cli \033[0m"
+    echo "\nRun build.sh like this:\n   sh build.sh day_time_tcp_cli \033[0m"
     exit
 fi
 
 # 判断对应的xxx.txt文件是否存在
 cmake_file_name=$1".txt"
 if [ ! -f $cmake_file_name ];then
-    echo "\033[31m$cmake_file_name file not exist\033[0m"
+    echo "$cmake_file_name file not exist"
     exit
 fi
 
@@ -39,7 +39,6 @@ rm -f CMakeLists.txt
 # 判断可执行文件是否存在
 # -x 判断对象是否存在，并且可执行
 if [ -x $1 ];then
-    echo "\nBuild success. Run:"
-    echo "\033[32m  ./$1\033[0m"
+    echo -e "\n Build success. Run:"
+    echo "  ./$1"
 fi
-

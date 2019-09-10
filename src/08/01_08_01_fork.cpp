@@ -5,7 +5,7 @@
 #include "./../lib/apue.h"
 
 int global_var = 6;
-char buf[] = "a write to stdout\n";
+char buf[] = "A write to stdout\n";
 
 int main(int argc, const char** agrv) {
     int var = 88;
@@ -15,7 +15,7 @@ int main(int argc, const char** agrv) {
         LogErrQuit("write error");
     }
 
-    cout << "before fork" << endl;
+    cout << "Before fork, var=" << var << endl;
 
     if ((pid = fork()) < 0) {
         LogErrQuit("fork error");

@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.12)
 
-project(01_08_01_fork)
+project(01-8_1-fork)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../lib apue.out)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../)
 
-add_executable(01_08_01_fork 01_08_01_fork.cpp)
+add_executable(01-8_1-fork 01-8_1-fork.cpp)
 
-target_link_libraries(01_08_01_fork apueLib)
+target_link_libraries(01-8_1-fork apueLib)

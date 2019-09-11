@@ -34,11 +34,6 @@
 # VSCode
 .vscode
 
-
-/src
-/src/**
-
-!*.c
-!*.cpp
-!*.h 
-!*.txt
+*
+!*.*
+!*/

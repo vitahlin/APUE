@@ -34,5 +34,6 @@ int main(int argc, const char** agrv) {
     } else {
         output(parent_str);
     }
+
     return 0;
 }

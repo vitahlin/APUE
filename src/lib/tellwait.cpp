@@ -61,6 +61,22 @@ void WAIT_PARENT() {
     }
 }
 
+void WAIT_CHILD() {
+    while (sigflag == 0) {
+        sigsuspend(&zeromask);
+    }
+
+    sigflag = 0;
+
+    if (sigprocmask(SIG_SETMASK, &oldmask, NULL) < 0) {
+        LogErrQuit("SIG_SETMASK error");
+    }
+}
+
 void TELL_CHILD(pid_t pid) {
+    kill(pid, SIGUSR1);
+}
+
+void TELL_PARENT(pid_t pid) {
     kill(pid, SIGUSR1);
 }

@@ -22,4 +22,6 @@ void LogErrQuit(string str);
 
 void TELL_WAIT();
 void TELL_CHILD(pid_t);
+void TELL_PARENT(pid_t);
+void WAIT_CHILD();
 void WAIT_PARENT();

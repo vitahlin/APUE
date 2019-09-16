@@ -1,0 +1,42 @@
+/**
+ * exec函数示例
+ */
+
+#include "./../lib/apue.h"
+
+char* env_init[] = {"USER=unknown", "PATH=/tmp", NULL};
+
+int main(int argc, const char** agrv) {
+    pid_t pid;
+
+    if (pid = fork() < 0) {
+        LogErrQuit("Fork error");
+    } else if (pid == 0) {
+        /**
+         * execle要求一个路径名和一个特定的环境
+         */
+        if (execle("/home/sar/bin/echoall", "echoall", "myarg1", "MY ARG2",
+                   (char*)0, env_init) < 0) {
+            LogErrQuit("Execle error");
+        }
+    }
+
+    if (waitpid(pid, NULL, 0) < 0) {
+        LogErrQuit("wait error");
+    }
+
+    if ((pid = fork()) < 0) {
+        LogErrQuit("Fork error");
+    } else if (pid == 0) {
+        /**
+         * 用一个文件名，并将调用者的环境传送给新程序
+         * execlp在这里能够工作是因为目录/home/sar/bin是当前路径前缀之一
+         */
+        if (execlp("echoall", "echoall", "only 1 arg", (char*)0, env_init) <
+            0) {
+            LogErrQuit("Execlp error");
+        }
+    }
+
+    return 0;
+}

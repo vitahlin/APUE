@@ -1,5 +1,5 @@
 /**
- * 解决进程的竞争条件，父进程先运行
+ * 解决进程的竞争条件，子进程先运行
  */
 
 #include "./../lib/apue.h"
@@ -27,8 +27,8 @@ int main(int argc, const char** agrv) {
     if ((pid = fork()) < 0) {
         LogErrQuit("fork error");
     } else if (pid == 0) {
-        TELL_PARENT(getppid());
         output(child_str);
+        TELL_PARENT(getppid());
     } else {
         WAIT_CHILD();
         output(parent_str);

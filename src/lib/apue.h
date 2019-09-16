@@ -19,3 +19,7 @@ using std::string;
 // 错误打印函数封装，在log_err.cc
 void LogErr(string str);
 void LogErrQuit(string str);
+
+void TELL_WAIT();
+void TELL_CHILD(pid_t);
+void WAIT_PARENT();

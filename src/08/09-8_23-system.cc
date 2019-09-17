@@ -1,5 +1,5 @@
 /**
- * 调用system函数示例
+ * 调用自己实现的system函数示例
  */
 
 #include "./../lib/apue.h"

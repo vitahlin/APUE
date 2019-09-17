@@ -1,5 +1,7 @@
 #include <errno.h>
 
+#include <stdarg.h>
+
 #include <stdio.h>
 #include <string.h>
 #include <cstdlib>
@@ -16,9 +18,11 @@ using std::cout;
 using std::endl;
 using std::string;
 
+#define MAXLINE 4096
+
 // 错误打印函数封装，在log_err.cpp
-void LogErr(string str);
-void LogErrQuit(string str);
+void ErrorSystem(const char* fmt, ...);
+void ErrorQuit(const char* fmt, ...);
 
 // 信号相关，tellwait.cpp
 void TELL_WAIT();
@@ -26,3 +30,7 @@ void TELL_CHILD(pid_t);
 void TELL_PARENT(pid_t);
 void WAIT_CHILD();
 void WAIT_PARENT();
+
+int MySystem(const char*);
+
+void PrintExit(int status);

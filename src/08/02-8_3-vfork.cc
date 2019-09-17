@@ -17,7 +17,7 @@ int main(int argc, const char** argv) {
     cout << "before fork, var=" << var << endl;
 
     if ((pid = vfork()) < 0) {
-        LogErrQuit("fork error");
+        ErrorQuit("fork error");
     } else if (pid == 0) {
         global_var++;
         var++;

@@ -12,13 +12,13 @@ int main(int argc, const char** argv) {
     pid_t pid;
 
     if (write(STDOUT_FILENO, buf, sizeof(buf) - 1) != sizeof(buf) - 1) {
-        LogErrQuit("write error");
+        ErrorQuit("write error");
     }
 
     cout << "Before fork, var=" << var << endl;
 
     if ((pid = fork()) < 0) {
-        LogErrQuit("fork error");
+        ErrorQuit("fork error");
     } else if (pid == 0) {
         // child
         global_var++;

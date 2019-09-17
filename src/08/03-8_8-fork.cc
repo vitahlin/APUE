@@ -11,11 +11,11 @@ int main(int argc, const char** argv) {
     pid_t pid;
 
     if ((pid = fork()) < 0) {
-        LogErrQuit("fork error");
+        ErrorQuit("fork error");
     } else if (pid == 0) {
         // first child
         if ((pid = fork()) < 0) {
-            LogErrQuit("fork error");
+            ErrorQuit("fork error");
         } else if (pid > 0) {
             // parent from second fork == first child
             exit(0);
@@ -27,7 +27,7 @@ int main(int argc, const char** argv) {
     }
 
     if (waitpid(pid, NULL, 0) != pid) {
-        LogErrQuit("fork error");
+        ErrorQuit("fork error");
     }
 
     exit(0);

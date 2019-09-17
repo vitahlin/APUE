@@ -20,11 +20,11 @@ void TELL_WAIT() {
      * SIGUSER1和SIGUSER2是用户自定义信号
      */
     if (signal(SIGUSR1, sig_usr) == SIG_ERR) {
-        LogErrQuit("signal sigusr1 error");
+        ErrorQuit("signal sigusr1 error");
     }
 
     if (signal(SIGUSR2, sig_usr) == SIG_ERR) {
-        LogErrQuit("signal sigusr2 error");
+        ErrorQuit("signal sigusr2 error");
     }
 
     // 将newmask信号集初始化为空，执行成功返回0，有错误返回-1
@@ -39,7 +39,7 @@ void TELL_WAIT() {
      * 调用该函数的进程，使用新的信号屏蔽集。newmask是我们希望阻塞的附加信号集
      */
     if (sigprocmask(SIG_BLOCK, &newmask, &oldmask) < 0) {
-        LogErrQuit("SIG_BLOCK error");
+        ErrorQuit("SIG_BLOCK error");
     }
 }
 
@@ -57,7 +57,7 @@ void WAIT_PARENT() {
      * SIG_SETMASK代表该进程新的信号屏蔽字将被oldmask信号集替代
      */
     if (sigprocmask(SIG_SETMASK, &oldmask, NULL) < 0) {
-        LogErrQuit("SIG_SETMASK error");
+        ErrorQuit("SIG_SETMASK error");
     }
 }
 
@@ -69,7 +69,7 @@ void WAIT_CHILD() {
     sigflag = 0;
 
     if (sigprocmask(SIG_SETMASK, &oldmask, NULL) < 0) {
-        LogErrQuit("SIG_SETMASK error");
+        ErrorQuit("SIG_SETMASK error");
     }
 }
 

@@ -30,7 +30,7 @@ int main(int argc, const char** argv) {
     char parent_str[] = "output from parent\n";
 
     if ((pid = fork()) < 0) {
-        LogErrQuit("fork error");
+        ErrorQuit("fork error");
     } else if (pid == 0) {
         output(child_str);
     } else {

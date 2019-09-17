@@ -15,7 +15,7 @@ int main(int argc, const char** agrv) {
         /**
          * execle要求一个路径名和一个特定的环境
          */
-        if (execle("/home/sar/bin/echoall", "echoall", "myarg1", "MY ARG2",
+        if (execle("./08-8_17-echoall", "echoall", "myarg1", "MY ARG2",
                    (char*)0, env_init) < 0) {
             LogErrQuit("Execle error");
         }

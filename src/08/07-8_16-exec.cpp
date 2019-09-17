@@ -32,8 +32,8 @@ int main(int argc, const char** agrv) {
          * 用一个文件名，并将调用者的环境传送给新程序
          * execlp在这里能够工作是因为目录/home/sar/bin是当前路径前缀之一
          */
-        if (execlp("echoall", "echoall", "only 1 arg", (char*)0, env_init) <
-            0) {
+        if (execlp("08-8_17-echoall", "echoall", "only 1 arg", (char*)0,
+                   env_init) < 0) {
             LogErrQuit("Execlp error");
         }
     }

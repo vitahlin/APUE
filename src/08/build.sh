@@ -12,7 +12,7 @@ fi
 
 # 判断运行脚本参数是否合法
 if [ $# -ne 1 ]; then
-    echo "\nRun build.sh like this:\n   sh build.sh day_time_tcp_cli \033[0m"
+    echo -e "\nRun build.sh like this:\n   sh build.sh day_time_tcp_cli \033[0m"
     exit
 fi
 

@@ -7,7 +7,7 @@
 int global_var = 6;
 char buf[] = "A write to stdout\n";
 
-int main(int argc, const char** agrv) {
+int main(int argc, const char** argv) {
     int var = 88;
     pid_t pid;
 

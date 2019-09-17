@@ -16,7 +16,7 @@ static void output(char* str) {
     }
 }
 
-int main(int argc, const char** agrv) {
+int main(int argc, const char** argv) {
     pid_t pid;
 
     TELL_WAIT();

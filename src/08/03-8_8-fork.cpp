@@ -7,7 +7,7 @@
 
 #include "./../lib/apue.h"
 
-int main(int argc, const char** agrv) {
+int main(int argc, const char** argv) {
     pid_t pid;
 
     if ((pid = fork()) < 0) {

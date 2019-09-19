@@ -11,6 +11,7 @@
  * 更正这一点的方法是：保存signal函数的返回值，在返回前重置原配置。
  * 3.
  * 第一次调用alarm和pause之间有一个竞争条件。在一个繁忙的系统中，可能alarm在调用pause之前超时，并调用了信号处理程序。
+ * 如果发生了这种情况，则在调用pause后，如果没有捕捉到其他信号，调用者将被永远挂起。
  */
 
 #include <sys/wait.h>
@@ -31,7 +32,7 @@ int MySleep(int seconds) {
     alarm(seconds);
 
     /**
-     * pause()韩式使调用进程挂起直至捕捉到一个信号
+     * pause()函数使调用进程挂起直至捕捉到一个信号
      * 只有执行了一个信号处理程序并从其返回时，pause才返回，在这种情况下，pause返回-1，error设置为EINTR
      */
     pause();

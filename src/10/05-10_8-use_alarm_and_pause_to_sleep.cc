@@ -3,6 +3,9 @@
  *
  * 对比04-10_7-use_alarm_and_pause_to_sleep，避免了alarm和pause的竞争条件。
  * 即使pause从未执行，在发生SIGALRM时，MySleep函数也返回
+ *
+ * 但是程序也有问题，它涉及与其他信号的交互。如果SIGALRM中断了某个其他信号处理程序，
+ * 则调用longjmp会提早终止该信号处理程序。
  */
 
 #include "./../lib/apue.h"

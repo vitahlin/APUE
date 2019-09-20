@@ -12,11 +12,8 @@
 
 #include "./../lib/apue.h"
 
-#include <setjmp.h>
 #include <sys/wait.h>
 #include <ctime>
-
-static jmp_buf env_alrm;
 
 static void SigAlrm(int sig_num) {}
 

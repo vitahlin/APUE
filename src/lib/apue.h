@@ -23,6 +23,7 @@ using std::string;
 // 错误打印函数封装，在log_err.cpp
 void ErrorSystem(const char* fmt, ...);
 void ErrorQuit(const char* fmt, ...);
+void ErrorReturn(const char* fmt, ...);
 
 // 信号相关，tellwait.cpp
 void TELL_WAIT();

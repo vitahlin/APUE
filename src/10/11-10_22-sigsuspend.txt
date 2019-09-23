@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.15)
+
+project(11-10_22-sigsuspend)
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/../lib apue.out)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../)
+
+add_executable(11-10_22-sigsuspend 11-10_22-sigsuspend.cc)
+
+target_link_libraries(11-10_22-sigsuspend apueLib)

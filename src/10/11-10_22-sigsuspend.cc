@@ -1,4 +1,23 @@
 /**
+ * 更改进程的信号屏蔽字可以阻塞所选择的信号，或解除对它们的阻塞。使用这种技术可以保护不希望由信号中断的代码临界区。
+ * 如果希望对一个信号解除阻塞，然后pause以等待以前被阻塞的信号发生，则又将如何呢？
+ * 错误方式的示例代码：
+ * sigemptyset(&new_mask);
+ * sigaddset(&new_mask, SIGINT);
+ * if (sigprocmask(SIG_BLOCK, &new_mask, &old_mask) < 0) {
+ *     ErrorSystem("SIG_BLOCK error");
+ *  }
+ *  if (sigprocmask(SIG_SETMASK, &old_mask, NULL) < 0) {
+ *      ErrorSystem("SIG_MASK error");
+ *  }
+ *   pause();
+ *
+ * 如果在阻塞时，产生了信号，那么该信号的传递就被推迟直到对它解除了阻塞。对应用程序而言，该信号发生了在解除对SIGINT的阻塞
+ * 和pause之间（取决于内核如何实现信号）。如果发生了这种情况，或者如果在解除阻塞时刻和pause之间确实发生了信号，那么就会
+ * 产生问题。因为可能不会再见到该信号，在这个时间窗口中发生的信号丢失了。这样就使pause永远阻塞。
+ *
+ * 为了纠正这个问题，需要在一个原子操作中先恢复信号屏蔽字，然后使进程休眠。这个功能是由sigsuspend函数提供。
+ *
  * sigsuspend的用法，保护代码临界区，使其不被特定信号中断
  */
 
@@ -27,6 +46,16 @@ int main(int argc, const char** argv) {
     sigaddset(&wait_mask, SIGUSR1);
     sigemptyset(&new_mask);
     sigaddset(&new_mask, SIGINT);
+
+    sigemptyset(&new_mask);
+    sigaddset(&new_mask, SIGINT);
+    if (sigprocmask(SIG_BLOCK, &new_mask, &old_mask) < 0) {
+        ErrorSystem("SIG_BLOCK error");
+    }
+    if (sigprocmask(SIG_SETMASK, &old_mask, NULL) < 0) {
+        ErrorSystem("SIG_MASK error");
+    }
+    pause();
 
     // 将SIGINT信号阻塞，同时保存当前信号集
     if (sigprocmask(SIG_BLOCK, &new_mask, &old_mask) < 0) {

@@ -1,5 +1,8 @@
 /**
  * 程序中有一个读低速设备可能阻塞的操作，我们希望超过一定时间量后就停止执行。就可以使用alarm来对操作设置时间上限值。
+ * 
+ * 运行结果：
+ * 在macOS上运行，时间超过后并不会中断输入，而是一直等到输入完成，与书中说明结果不符合。
  *
  * 程序有两个问题：
  * 1.
@@ -26,6 +29,8 @@ int main(int argc, const char** argv) {
     }
 
     alarm(10);
+    cout << "Begin input:" << endl;
+
     if ((n = read(STDIN_FILENO, line, MAXLINE)) < 0) {
         ErrorSystem("read error");
     }

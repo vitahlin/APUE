@@ -1,8 +1,7 @@
 /**
  * 使用alarm和pause函数来实现sleep进程休眠功能
  *
- * 运行时执行Ctrl+C来中断程序，会发现MySleep函数引起的longjmp会使另外一个信号处理程序SigIntHandler提早终止，
- * 即使它还未完成。
+ * 运行时执行Ctrl+C来中断程序，会发现MySleep函数引起的longjmp会使另外一个信号处理程序SigIntHandler提早终止，即使它还未完成。
  */
 
 #include "./../lib/apue.h"

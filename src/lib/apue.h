@@ -20,6 +20,11 @@ using std::string;
 
 #define MAXLINE 4096
 
+// macOS上面可能会出现SIGCLD找不到的情况
+#ifndef SIGCLD
+#define SIGCLD SIGCHLD
+#endif
+
 // 错误打印函数封装，在log_err.cpp
 void ErrorSystem(const char* fmt, ...);
 void ErrorQuit(const char* fmt, ...);

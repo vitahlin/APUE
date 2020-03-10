@@ -1,10 +1,11 @@
 /**
  * 父进程在fork之前先注册了SIGCLD的信号处理函数SigcldHandler,然后做自己的事情。
- * 当子进程退出时，会给父进程发送一个SIGCLD信号。然后SIgcldHandler函数就会执行。
+ * 当子进程退出时，会给父进程发送一个SIGCLD信号。然后SigcldHandler函数就会执行。
+ *
  * 可以在SigcldHandler函数中调用wait获得子进程退出时的状态，并且此时wait不会阻塞。
  * 当SigcldHandler函数执行完后，父进程又继续做自己的事情。
  */
-#include <sys/wait.h>
+
 #include "./../lib/apue.h"
 
 static void SigcldHandler(int);

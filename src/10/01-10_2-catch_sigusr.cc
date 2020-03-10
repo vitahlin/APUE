@@ -1,6 +1,7 @@
 /**
  * 捕捉SIGUSR1和SIGUSR2信号的示例
- * 使程序在后台运行，./01-10_2-catch_sigusr & ，然后用kill命令将信号发送给进程
+ * 使程序在后台运行，终端中输入：./01-10_2-catch_sigusr & ，会打印当前进程ID
+ * xxx，然后用kill命令将信号发送给进程，输入：kill -USR1 xxx
  */
 
 #include "./../lib/apue.h"

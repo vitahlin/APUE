@@ -12,7 +12,7 @@ fi
 
 # 判断运行脚本参数是否合法
 if [ $# -ne 1 ]; then
-    echo -e "\nRun build.sh like this:\n   sh build.sh day_time_tcp_cli \033[0m"
+    echo "\nRun build.sh like this:\n   sh build.sh day_time_tcp_cli \033[0m"
     exit
 fi
 
@@ -39,6 +39,6 @@ rm -f CMakeLists.txt
 # 判断可执行文件是否存在
 # -x 判断对象是否存在，并且可执行
 if [ -x $1 ];then
-    echo -e "\n Build success. Run:"
+    echo "\n Build success. Run:"
     echo "  ./$1"
 fi

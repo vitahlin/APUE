@@ -13,6 +13,8 @@
 #include <signal.h>
 #include <unistd.h>
 
+#include <pthread.h>
+
 using std::cin;
 using std::cout;
 using std::endl;

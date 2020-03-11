@@ -75,7 +75,7 @@ int main(int argc, const char** argv) {
      * 3.调用该进程设置的信号处理函数（程序中如果先来SIGUSR1信号，然后过来SIGINT信号，则信号处理函数会调用两次，第一次执行SigInt，第二次执行SigUsr1，因为SigUsr1是前面阻塞的）
      * 4.待信号处理函数返回，sigsuspend返回了（sigsuspend将捕捉信号和信号处理函数集成到一起了）
      *
-     * sigsuspend实际是将sigprocmask和pause结合起来原子操作
+     * sigsuspend实际是将sigprocmask和pause结合起来原子操作，sigsuspend返回时，将信号屏蔽字恢复为调用它之前的值
      */
     if (sigsuspend(&wait_mask) != -1) {
         ErrorSystem("sigsuspend error");

@@ -70,13 +70,10 @@ int main(int argc, const char** argv) {
 
     /**
      * sigsuspend的原子操作是：
-     * 1. 设置新的mask阻塞当前进程，这里是用wait替换new，即阻塞SIGUSR1信号
-     * 2. 收到SIGUSR1信号，阻塞，程序继续挂起；收到其他信号，恢复原先的mask
-     * 3.
-     * 调用该进程设置的信号处理函数（程序中如果先来SIGUSR1信号，然后过来SIGINT信号，则信号处理函数会调用两次，
-     * 第一次执行SigInt，第二次执行SigUsr1，因为SigUsr1是前面阻塞的）
-     * 4.
-     * 待信号处理函数返回，sigsuspend返回了（sigsuspend将捕捉信号和信号处理函数集成到一起了）
+     * 1.设置新的mask阻塞当前进程，这里是用wait替换new，即阻塞SIGUSR1信号
+     * 2.收到SIGUSR1信号，阻塞，程序继续挂起；收到其他信号，恢复原先的mask
+     * 3.调用该进程设置的信号处理函数（程序中如果先来SIGUSR1信号，然后过来SIGINT信号，则信号处理函数会调用两次，第一次执行SigInt，第二次执行SigUsr1，因为SigUsr1是前面阻塞的）
+     * 4.待信号处理函数返回，sigsuspend返回了（sigsuspend将捕捉信号和信号处理函数集成到一起了）
      *
      * sigsuspend实际是将sigprocmask和pause结合起来原子操作
      */

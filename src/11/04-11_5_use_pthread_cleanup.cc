@@ -1,9 +1,7 @@
 /**
  * 线程清理处理程序
  *
- * Todo：修正代码，使之编译通过
- *
- * 在macOS和Centos7上编译都失败，书上说明运行结果：
+ * 在macOS运行出现bus error，书上说明运行结果：
  * thread 1 start
  * thread 1 push complete
  * thread 2 start
@@ -26,8 +24,15 @@ void Cleanup(void* arg) {
 
 void* ThreadFunc1(void* arg) {
     cout << "thread 1 start" << endl;
-    pthread_cleanup_push(Cleanup, "thread 1 first handler");
-    pthread_cleanup_push(Cleanup, "thread 1 second handler");
+
+    char content[25] = "Thread 1 first handler";
+    memset(content, '\0', sizeof(content));
+
+    // Todo：修正不能正常打印cleanup xxx的问题
+    strcpy(content, "Thread 1 first handler");
+    pthread_cleanup_push(Cleanup, content);
+    strcpy(content, "Thread 1 second handler");
+    pthread_cleanup_push(Cleanup, content);
     cout << "thread 1 push complete" << endl;
 
     if (arg) {
@@ -41,8 +46,13 @@ void* ThreadFunc1(void* arg) {
 
 void* ThreadFunc2(void* arg) {
     cout << "thread 2 start" << endl;
-    pthread_cleanup_push(Cleanup, "thread 2 first handler");
-    pthread_cleanup_push(Cleanup, "thread 2 second handler");
+    char content[25] = "Thread 2 first handler";
+
+    memset(content, '\0', sizeof(content));
+    strcpy(content, "Thread 2 first handler");
+    pthread_cleanup_push(Cleanup, content);
+    strcpy(content, "Thread 2 second handler");
+    pthread_cleanup_push(Cleanup, content);
     cout << "thread 2 push complete" << endl;
 
     if (arg) {

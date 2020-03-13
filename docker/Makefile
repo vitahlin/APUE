@@ -20,6 +20,3 @@ status:
 
 centos:
 	docker-compose exec centos /bin/bash
-	
-ubuntu:
-	docker-compose exec ubuntu /bin/bash

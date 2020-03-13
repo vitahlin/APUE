@@ -14,6 +14,7 @@
 #include <unistd.h>
 
 #include <pthread.h>
+#include <time.h>
 
 using std::cin;
 using std::cout;

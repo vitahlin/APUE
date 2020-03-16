@@ -75,7 +75,6 @@ int main(int argc, const char** argv) {
     pthread_mutex_init(&count_mutex, NULL);
     pthread_cond_init(&count_threshold, NULL);
 
-    // 开启两个读线程
     for (i = 0; i < NUM_THREADS - 1; i++) {
         pthread_create(&threads[i], NULL, IncreaseCount, (void*)&thread_ids[i]);
     }

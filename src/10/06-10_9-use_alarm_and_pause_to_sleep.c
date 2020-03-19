@@ -4,11 +4,9 @@
  * 运行时执行Ctrl+C来中断程序，会发现MySleep函数引起的longjmp会使另外一个信号处理程序SigIntHandler提早终止，即使它还未完成。
  */
 
-#include "./../lib/apue.h"
-
 #include <setjmp.h>
-#include <sys/wait.h>
-#include <ctime>
+
+#include "./../lib/apue.h"
 
 static jmp_buf env_alrm;
 
@@ -16,19 +14,19 @@ static void SigIntHandler(int);
 static void SigAlrm(int);
 
 int MySleep(int seconds) {
-    cout << "Sleep " << seconds << " seconds ..." << endl;
+    printf("Sleep %d seconds...\n", seconds);
 
     if (signal(SIGALRM, SigAlrm) == SIG_ERR) {
         return seconds;
     }
 
     if (setjmp(env_alrm) == 0) {
-        cout << "Set alarm" << endl;
+        printf("Set alarm\n");
         alarm(seconds);
         pause();
     }
 
-    cout << "Alarm end" << endl;
+    printf("Alarm end\n");
 
     return alarm(0);
 }
@@ -43,23 +41,24 @@ int main(int argc, const char** argv) {
         ErrorSystem("signal(SIGINT) error");
     }
 
-    cout << "Run begin time " << time(0) << endl;
-    unslept = MySleep(5);
-    cout << "Run end time " << time(0) << endl;
-    cout << "MySleep returned: " << unslept << endl;
+    printf("Run begin time %ld\n", time(0));
+    MySleep(5);
+    printf("Run end time %ld\n", time(0));
+
+    printf("MySleep returned: %d\n", unslept);
 
     return 0;
 }
 
 static void SigIntHandler(int sig_num) {
-    cout << "SigInt start" << endl;
+    printf("SigInt start\n");
 
     int i, j;
 
     // 用volatile阻止优化编译程序去除循环语句
     volatile int k;
 
-    cout << "Int handler begin time " << time(0) << endl;
+    printf("Int handler begin time %ld\n", time(0));
 
     // 让循环的运行时间大于休眠时间
     for (i = 0; i < 300000; i++) {
@@ -68,11 +67,11 @@ static void SigIntHandler(int sig_num) {
         }
     }
 
-    cout << "Int handler end time " << time(0) << endl;
-    cout << "SigInt end" << endl;
+    printf("int handler end time %ld\n", time(0));
+    printf("SigInt end\n");
 }
 
 static void SigAlrm(int sig_num) {
-    cout << "Run SigAlrm..." << endl;
+    printf("Run SigAlrm...\n");
     longjmp(env_alrm, 1);
 }

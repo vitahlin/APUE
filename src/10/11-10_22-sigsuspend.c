@@ -98,7 +98,7 @@ static void SigInt(int sig_num) {
 }
 
 static void SigUsr1(int sig_num) {
-    cout << "catch SIGUSR1" << endl;
+    printf("catch SIGUSR1\n");
 }
 
 void PrintMask(const char* str) {

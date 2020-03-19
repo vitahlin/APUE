@@ -4,11 +4,9 @@
  * 和07-10_10-alarm程序的区别在于，无论系统是否重新启动被中断的系统调用，该程序都会如预期那样工作。等待输入超过一定时间量后就停止运行。
  */
 
-#include "./../lib/apue.h"
-
 #include <setjmp.h>
-#include <sys/wait.h>
-#include <ctime>
+
+#include "./../lib/apue.h"
 
 static jmp_buf env_alrm;
 

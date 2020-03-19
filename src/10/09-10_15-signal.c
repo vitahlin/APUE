@@ -47,7 +47,7 @@ int main(int argc, const char** argv) {
      * 信号集里面有该信号则返回1，没有则返回0，有错误则返回-1
      */
     if (sigismember(&pend_mask, SIGQUIT)) {
-        cout << "SIGQUIT pending" << endl;
+        printf("SIGQUIT pending\n");
     }
 
     /**
@@ -57,16 +57,14 @@ int main(int argc, const char** argv) {
         ErrorSystem("SIG_SETMASK error");
     }
 
-    cout << "SIGQUIT unblocked" << endl;
-
+    printf("SIGQUIT unblocked\n");
     sleep(5);
 
     return 0;
 }
 
 static void SigQuitHandler(int sig_num) {
-    cout << "catch SIGQUIT" << endl;
-
+    printf("catch SIGQUIT\n");
     if (signal(SIGQUIT, SIG_DFL) == SIG_ERR) {
         ErrorSystem("can not reset SIGQUIT");
     }

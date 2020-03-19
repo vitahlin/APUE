@@ -25,10 +25,10 @@
  * [1]+  Done                    ./10-10_20-signal
  */
 
-#include "./../lib/apue.h"
-
 #include <setjmp.h>
 #include <time.h>
+
+#include "./../lib/apue.h"
 
 void PrintMask(const char* str);
 
@@ -62,7 +62,7 @@ int main(int argc, const char** argv) {
 }
 
 static void SigAlrm(int sig_num) {
-    cout << "catch alarm signal, time: " << time(0) << endl;
+    printf("catch alarm signal, time: %ld\n", time(0));
     PrintMask("in SigAlrm: ");
 }
 
@@ -75,7 +75,7 @@ static void SigUsr1(int sig_num) {
 
     PrintMask("start SigUsr1: ");
 
-    cout << "start alarm, time: " << time(0) << endl;
+    printf("start alarm, time: %ld\n", time(0));
     alarm(3);
     start_time = time(NULL);
 
@@ -103,19 +103,19 @@ void PrintMask(const char* str) {
     } else {
         printf("%s", str);
         if (sigismember(&sigset, SIGINT)) {
-            printf(" SIGINT");
+            printf("SIGINT");
         }
 
         if (sigismember(&sigset, SIGQUIT)) {
-            printf(" SIGQUIT");
+            printf("SIGQUIT");
         }
 
         if (sigismember(&sigset, SIGUSR1)) {
-            printf(" SIGUSR1");
+            printf("SIGUSR1");
         }
 
         if (sigismember(&sigset, SIGALRM)) {
-            printf(" SIGALRM");
+            printf("SIGALRM");
         }
 
         printf("\n");

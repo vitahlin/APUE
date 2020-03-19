@@ -15,12 +15,13 @@
 
 #include <pwd.h>
 #include <sys/types.h>
+
 #include "./../lib/apue.h"
 
 static void MyAlarm(int sig_num) {
     struct passwd* root_ptr;
 
-    cout << endl << "In signal handler" << endl;
+    printf("\nIn signal handler\n");
 
     // getpwnam获取用户登录相关信息
     if ((root_ptr = getpwnam("root")) == NULL) {
@@ -44,8 +45,7 @@ int main(int argc, const char** argv) {
         }
 
         if (strcmp(ptr->pw_name, "sar") != 0) {
-            cout << "return value corrupted, pw_name = " << ptr->pw_name
-                 << endl;
+            printf("return value corrupted, pw_name=%s\n", ptr->pw_name);
         }
     }
 

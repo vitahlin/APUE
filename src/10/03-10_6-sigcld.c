@@ -14,11 +14,11 @@ int main(int argc, const char** argv) {
     pid_t pid;
 
     if (signal(SIGCLD, SigcldHandler) == SIG_ERR) {
-        cout << "siganl error" << endl;
+        printf("signal error\n");
     }
 
     if ((pid = fork()) < 0) {
-        cout << "fork error" << endl;
+        printf("fork error\n");
     } else if (pid == 0) {
         sleep(2);
         _exit(0);
@@ -34,15 +34,15 @@ static void SigcldHandler(int sig_num) {
     pid_t pid;
     int status;
 
-    cout << "SIGCLD received" << endl;
+    printf("SIGCLD received\n");
 
     if (signal(SIGCLD, SigcldHandler) == SIG_ERR) {
-        cout << "signal error" << endl;
+        printf("signal error\n");
     }
 
     if ((pid = wait(&status)) < 0) {
-        cout << "wait error" << endl;
+        printf("wait error\n");
     }
 
-    cout << "pid = " << pid << endl;
+    printf("pid=%d\n", pid);
 }

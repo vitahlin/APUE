@@ -14,21 +14,18 @@
  * 如果发生了这种情况，则在调用pause后，如果没有捕捉到其他信号，调用者将被永远挂起。
  */
 
-#include <sys/wait.h>
 #include "./../lib/apue.h"
-
-#include <ctime>
 
 static void SigAlrm(int);
 
 int MySleep(int seconds) {
-    cout << "Sleep " << seconds << " seconds ..." << endl;
+    printf("Sleep %d seconds...\n", seconds);
 
     if (signal(SIGALRM, SigAlrm) == SIG_ERR) {
         return seconds;
     }
 
-    cout << "Set alarm" << endl;
+    printf("Set alarm\n");
     alarm(seconds);
 
     /**
@@ -37,21 +34,21 @@ int MySleep(int seconds) {
      */
     pause();
 
-    cout << "Alarm end" << endl;
+    printf("Alarm end\n");
 
     // alarm(0)可以取消闹钟，并返回剩余时间
     return alarm(0);
 }
 
 int main(int argc, const char** argv) {
-    cout << "Run begin time " << time(0) << endl;
+    printf("Run begin time %ld\n", time(0));
     MySleep(3);
-    cout << "Run end time " << time(0) << endl;
+    printf("Run end time %ld\n", time(0));
 
     return 0;
 }
 
 static void SigAlrm(int sig_num) {
     // 不做任何事情，只是单纯调用触发pause函数
-    cout << "Run SigAlrm..." << endl;
+    printf("Run SigAlarm...\n");
 }

@@ -29,10 +29,10 @@ int main(int argc, const char** argv) {
 
 static void SigUsrHandler(int sig_num) {
     if (sig_num == SIGUSR1) {
-        cout << "Catch signal SIGUSR1" << endl;
+        printf("catch signal SIGUSR1\n");
     } else if (sig_num == SIGUSR2) {
-        cout << "Catch signal SIGUSR2" << endl;
+        printf("catch signal SIGUSR2\n");
     } else {
-        cout << "Catch signal " << sig_num << endl;
+        printf("catch signal %d\n", sig_num);
     }
 }

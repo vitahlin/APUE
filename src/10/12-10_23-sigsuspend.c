@@ -10,7 +10,7 @@ volatile sig_atomic_t quit_flag;
 
 static void SigIntFunc(int sig_num) {
     if (sig_num == SIGINT) {
-        cout << endl << "interrupt" << endl;
+        printf("\ninterrupt\n");
     } else if (sig_num == SIGQUIT) {
         quit_flag = 1;
     }

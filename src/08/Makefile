@@ -22,3 +22,20 @@ buildall: 01-8_1-fork 02-8_3-vfork
 	cd ../lib && $(MAKE) -f lib.mk
 	clang -c 02-8_3-vfork.c 
 	clang -o 02-8_3-vfork.out 02-8_3-vfork.o $(lib_obj)
+
+CC = clang
+C_FLAGS = -g -Wall
+INCLUDE = 
+LIBS = 
+
+# wildcard对c文件进行展开
+C_SRC := $(wildcard *.c)
+OBJ := $(patsubst %.c,%.o,$(C_SRC))
+OUT := $(patsubst %.c,%.out,$(C_SRC))
+
+$(OUT):$(OBJ)
+	${CC} ${CFLAGS} -o $@ $(lib_obj) $*.o
+
+obj:$(OBJ) 
+
+out:$(OUT)

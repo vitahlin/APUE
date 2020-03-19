@@ -14,7 +14,7 @@ int main(int argc, const char** argv) {
     int var = 88;
     pid_t pid;
 
-    cout << "before fork, var=" << var << endl;
+    printf("Before fork, var=%d\n", var);
 
     if ((pid = vfork()) < 0) {
         ErrorQuit("fork error");
@@ -26,8 +26,7 @@ int main(int argc, const char** argv) {
         _exit(0);
     }
 
-    cout << "pid=" << getpid() << ", global_var=" << global_var
-         << ", var=" << var << endl;
+    printf("pid=%d, global var=%d, var=%d\n", getpid(), global_var, var);
 
     return 0;
 }

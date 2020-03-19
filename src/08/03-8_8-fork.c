@@ -22,7 +22,7 @@ int main(int argc, const char** argv) {
         }
 
         sleep(2);
-        cout << "second child, parent pid=" << (long)getppid() << endl;
+        printf("second child, parent pid=%ld", (long)getppid());
         exit(0);
     }
 

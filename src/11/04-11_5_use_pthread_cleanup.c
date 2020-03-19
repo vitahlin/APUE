@@ -23,7 +23,7 @@ void Cleanup(void* arg) {
 }
 
 void* ThreadFunc1(void* arg) {
-    cout << "thread 1 start" << endl;
+    printf("thread 1 start\n");
 
     char content[25] = "Thread 1 first handler";
     memset(content, '\0', sizeof(content));
@@ -33,7 +33,7 @@ void* ThreadFunc1(void* arg) {
     pthread_cleanup_push(Cleanup, content);
     strcpy(content, "Thread 1 second handler");
     pthread_cleanup_push(Cleanup, content);
-    cout << "thread 1 push complete" << endl;
+    printf("thread 1 push complete\n");
 
     if (arg) {
         return ((void*)1);
@@ -45,7 +45,7 @@ void* ThreadFunc1(void* arg) {
 }
 
 void* ThreadFunc2(void* arg) {
-    cout << "thread 2 start" << endl;
+    printf("thread 2 start\n");
     char content[25] = "Thread 2 first handler";
 
     memset(content, '\0', sizeof(content));
@@ -53,7 +53,7 @@ void* ThreadFunc2(void* arg) {
     pthread_cleanup_push(Cleanup, content);
     strcpy(content, "Thread 2 second handler");
     pthread_cleanup_push(Cleanup, content);
-    cout << "thread 2 push complete" << endl;
+    printf("thread 2 push complete\n");
 
     if (arg) {
         return ((void*)2);

@@ -5,12 +5,12 @@
 #include "./../lib/apue.h"
 
 void* ThreadFunc1(void* arg) {
-    cout << "thread 1 returnning" << endl;
+    printf("thread 1 returnning\n");
     return ((void*)1);
 }
 
 void* ThreadFunc2(void* arg) {
-    cout << "thread 2 exiting" << endl;
+    printf("thread 2 exiting\n");
     pthread_exit((void*)2);
 }
 

@@ -11,7 +11,7 @@ void PrintIds(const char* s) {
     pid = getpid();
     tid = pthread_self();
 
-    printf("%s pid %u tid %u\n", s, pid, tid);
+    printf("%s pid %u tid %u\n", s, (int)pid, (int)tid);
 }
 
 int main(int argc, const char** argv) {

@@ -7,9 +7,7 @@
 void PrintIds(const char* s) {
     pid_t pid;
     pthread_t tid;
-
     pid = getpid();
-
     /**
      * 新线程是通过调用pthread_self函数获取自己的ID，而不是从共享内存中读出
      * 或者从线程的启动例程中以参数的形式收到。
@@ -19,8 +17,7 @@ void PrintIds(const char* s) {
      * 化的new_tid的内容，这个内容并不是正确的线程ID
      */
     tid = pthread_self();
-
-    printf("%s pid %u tid %u\n", s, pid, tid);
+    printf("%s pid %d tid %d\n", s, (int)pid, (int)tid);
 }
 
 void* ThreadFunc(void* arg) {

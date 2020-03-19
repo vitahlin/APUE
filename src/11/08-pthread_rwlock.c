@@ -9,9 +9,9 @@ pthread_rwlock_t rwlock;
 int count = 0;
 
 void* ReadFunc(void* ptr) {
-    while (true) {
+    while (1) {
         pthread_rwlock_rdlock(&rwlock);
-        printf("Thread %x read, count %d\n", pthread_self(), count);
+        printf("Thread %x read, count %d\n", (int)pthread_self(), count);
         pthread_rwlock_unlock(&rwlock);
 
         sleep(1);
@@ -21,10 +21,10 @@ void* ReadFunc(void* ptr) {
 }
 
 void* WriteFunc(void* ptr) {
-    while (true) {
+    while (1) {
         pthread_rwlock_wrlock(&rwlock);
         count++;
-        printf("Thread %x write, count %d\n", pthread_self(), count);
+        printf("Thread %x write, count %d\n", (int)pthread_self(), count);
         pthread_rwlock_unlock(&rwlock);
 
         sleep(1);

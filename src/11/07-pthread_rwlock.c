@@ -14,7 +14,7 @@ void* Procude(void* ptr) {
     for (int i = 0; i < 5; ++i) {
         pthread_rwlock_wrlock(&sharedData.rwlock);
         sharedData.product = i;
-        cout << "Produce: " << i << endl;
+        printf("Produce: %d\n", i);
         pthread_rwlock_unlock(&sharedData.rwlock);
 
         sleep(1);

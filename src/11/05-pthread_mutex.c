@@ -10,19 +10,16 @@ int num = 0;
 pthread_mutex_t mutex;
 
 void* ThreadFunc1(void* arg) {
-    cout << "Thread 1 start" << endl;
+    printf("Thread 1 start\n");
     int i = 0;
     for (i = 0; i < 3; i++) {
-        cout << "This is thread 1..." << endl;
+        printf("This is thread 1...\n");
 
         // 获取互斥锁
         pthread_mutex_lock(&mutex);
-
         sleep(1);
-
         num++;
-
-        cout << "Thread 1 add one to num" << num << endl;
+        printf("Thread 1 add one to num %d\n", num);
         pthread_mutex_unlock(&mutex);
     }
 
@@ -30,10 +27,10 @@ void* ThreadFunc1(void* arg) {
 }
 
 void* ThreadFunc2(void* arg) {
-    cout << "Thread 2 start" << endl;
+    printf("Thread 2 start\n");
     int i = 0;
     for (i = 0; i < 3; i++) {
-        cout << "This is thread 2..." << endl;
+        printf("This is thread 2...\n");
 
         // 获取互斥锁
         pthread_mutex_lock(&mutex);
@@ -43,7 +40,7 @@ void* ThreadFunc2(void* arg) {
 
         num++;
 
-        cout << "Thread 2 add one to num" << num << endl;
+        printf("Thread 2 add one to num %d\n", num);
 
         // 释放锁
         pthread_mutex_unlock(&mutex);
@@ -83,6 +80,6 @@ int main(int argc, const char** argv) {
         ErrorQuit("can not join with thread 2");
     }
 
-    cout << "End" << endl;
+    printf("End\n");
     return 0;
 }

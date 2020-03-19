@@ -15,12 +15,12 @@ int main(int argc, const char** argv) {
     pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
     pthread_mutex_lock(&mutex);
-    cout << "Mutex is locked" << endl;
+    printf("Mutex is locked\n");
 
     clock_gettime(CLOCK_REALTIME, &tout);
     tmp = localtime(&tout.tv_sec);
     strftime(buf, sizeof(buf), "%r", tmp);
-    cout << "Current time is " << buf << endl;
+    printf("Current time is %s\n", buf);
 
     tout.tv_sec += 10;
 
@@ -28,11 +28,11 @@ int main(int argc, const char** argv) {
     clock_gettime(CLOCK_REALTIME, &tout);
     tmp = localtime(&tout.tv_sec);
     strftime(buf, sizeof(buf), "%r", tmp);
-    cout << "The time is now " << buf << endl;
+    printf("The time is now %s\n", buf);
     if (err == 0) {
-        cout << "Mutex locked again" << endl;
+        printf("Mutex locked again\n");
     } else {
-        cout << "Can not lock mutex again: " << strerror(err) << endl;
+        printf("Can not lock mutex again: %s\n", strerror(err));
     }
 
     return 0;

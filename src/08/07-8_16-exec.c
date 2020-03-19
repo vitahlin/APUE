@@ -9,7 +9,7 @@ char* env_init[] = {"USER=unknown", "PATH=/tmp", NULL};
 int main(int argc, const char** argv) {
     pid_t pid;
 
-    if (pid = fork() < 0) {
+    if ((pid = fork()) < 0) {
         ErrorQuit("Fork error");
     } else if (pid == 0) {
         /**

@@ -10,11 +10,11 @@ int main(int argc, const char** argv) {
     extern char** environ;
 
     for (i = 0; i < argc; i++) {
-        cout << "argv[" << i << "]" << argv[i] << endl;
+        printf("argv[%d] %s\n", i, argv[i]);
     }
 
     for (ptr = environ; *ptr != 0; ptr++) {
-        cout << *ptr << endl;
+        printf("%s\n", *ptr);
     }
 
     return 0;

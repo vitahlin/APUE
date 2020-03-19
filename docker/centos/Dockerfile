@@ -1,14 +1,8 @@
 FROM centos:7
 
 RUN yum -y install make && \
-    yum -y install wget && \
-    yum -y install gcc && \
-    yum -y install gcc-c++ && \
-    wget https://cmake.org/files/v3.15/cmake-3.15.2.tar.gz && \
-    tar xvf cmake-3.15.2.tar.gz && cd cmake-3.15.2 && \
-    ./bootstrap && \
-    gmake && \
-    gmake install 
+    yum -y install clang && \
+    yum -y install gcc-c++
 
 RUN mkdir /apue 
 WORKDIR /apue/

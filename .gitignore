@@ -34,7 +34,4 @@
 # VSCode
 .vscode
 
-*
-!*.*
-!*/
-*.[0-9]
+!Makefile

@@ -15,7 +15,7 @@ int main(int argc, const char** argv) {
         ErrorQuit("write error");
     }
 
-    cout << "Before fork, var=" << var << endl;
+    printf("before fork, var=%d\n", var);
 
     if ((pid = fork()) < 0) {
         ErrorQuit("fork error");
@@ -28,8 +28,6 @@ int main(int argc, const char** argv) {
         sleep(2);
     }
 
-    cout << "pid=" << getpid() << ", global_var=" << global_var
-         << ", var=" << var << endl;
-
+    printf("pid=%d, global var=%d, var=%d\n", getpid(), global_var, var);
     return 0;
 }

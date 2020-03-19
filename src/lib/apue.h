@@ -10,14 +10,6 @@
 #include <time.h>
 #include <unistd.h>
 
-#include <cstdlib>
-#include <iostream>
-
-using std::cin;
-using std::cout;
-using std::endl;
-using std::string;
-
 #define MAXLINE 4096
 
 // macOS上面可能会出现SIGCLD找不到的情况

@@ -7,35 +7,23 @@ clean:
 	cd ../lib && $(MAKE) -f lib.mk clean
 	-rm -f *.o *.out
 
-lib_obj = ../lib/log_err.o ../lib/system.o ../lib/tellwait.o 
-
-buildall: 01-8_1-fork 02-8_3-vfork
-
-01-8_1-fork:
-	make clean
-	cd ../lib && $(MAKE) -f lib.mk
-	clang -c 01-8_1-fork.c 
-	clang -o 01-8_1-fork.out 01-8_1-fork.o $(lib_obj)
-
-02-8_3-vfork:
-	make clean
-	cd ../lib && $(MAKE) -f lib.mk
-	clang -c 02-8_3-vfork.c 
-	clang -o 02-8_3-vfork.out 02-8_3-vfork.o $(lib_obj)
+LIB_OBJ= ../lib/log_err.o ../lib/system.o ../lib/tellwait.o 
 
 CC = clang
 C_FLAGS = -g -Wall
 INCLUDE = 
 LIBS = 
 
-# wildcard对c文件进行展开
 C_SRC := $(wildcard *.c)
-OBJ := $(patsubst %.c,%.o,$(C_SRC))
-OUT := $(patsubst %.c,%.out,$(C_SRC))
+OBJ_FILES := $(patsubst %.c,%.o,$(C_SRC))
+OUT_FILES := $(patsubst %.c,%.out,$(C_SRC))
+$(OUT_FILES):$(OBJ_FILES)
+	${CC} ${CFLAGS} -o $@ $(LIB_OBJ) $*.o
+build_obj:$(OBJ_FILES) 
+build_out:$(OUT_FILES)
 
-$(OUT):$(OBJ)
-	${CC} ${CFLAGS} -o $@ $(lib_obj) $*.o
-
-obj:$(OBJ) 
-
-out:$(OUT)
+buildall:
+	make clean
+	cd ../lib && $(MAKE) -f lib.mk
+	make build_obj 
+	make build_out

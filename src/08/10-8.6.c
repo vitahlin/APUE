@@ -10,10 +10,10 @@ int main(int argc, const char** argv) {
 
     int status;
 
-    cout << "习题8.6" << endl
-         << "编写一个程序创建一个僵死进程，然后调用system函数执行ps命令以验"
-            "证该进程是僵死进程。"
-         << endl;
+    printf("习题8.6\n");
+    printf(
+        "编写一个程序创建一个僵死进程，然后调用system函数执行ps命令以严重该进程"
+        "是僵死进程\n");
 
     if ((pid = fork()) < 0) {
         ErrorQuit("Fork error");
@@ -21,7 +21,7 @@ int main(int argc, const char** argv) {
         exit(0);
     }
 
-    cout << "Child process pid " << pid << endl;
+    printf("Child process pid %d\n", pid);
     if ((status = MySystem("ps -el")) < 0) {
         ErrorSystem("MySystem error");
     }
